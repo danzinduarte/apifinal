@@ -1,0 +1,53 @@
+<div id="login" class="flex-scrollable" layout="column" ms-scroll>
+    <div id="login-form-wrapper" layout="column" layout-align="center center">
+        <div id="login-form" class="md-whiteframe-8dp">
+            <div class="logo md-accent-bg">
+                <span>F</span>
+            </div>
+
+            <div class="title">Seja bem vindo</div>
+
+            <form name="loginForm" novalidate>
+                <md-input-container class="md-block" md-no-float>
+                    <input type="email" name="email" ng-model="vm.form.email" placeholder="Email"
+                           ng-pattern="/^.+@.+\..+$/" required>
+                    <div ng-messages="loginForm.email.$error" role="alert" multiple>
+                        <div ng-message="required">
+                            <span>Email é obrigatório</span>
+                        </div>
+                        <div ng-message="pattern">
+                            <span>Informe um endereço de email válido</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block" md-no-float>
+                    <input type="password" name="password" ng-model="vm.form.password" placeholder="Senha"
+                           required>
+                    <div ng-messages="loginForm.password.$error" role="alert">
+                        <div ng-message="required">
+                            <span>A senha é obrigatória</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <div class="remember-forgot-password" layout="row" layout-xs="column"
+                     layout-align="space-between center">
+                    <md-checkbox class="remember-me" ng-model="data.cb1" aria-label="Remember Me">
+                        <span>Lembrar de mim</span>
+                    </md-checkbox>
+
+                    <a ui-sref="app.pages_auth_forgot-password" class="forgot-password md-accent-color"
+                       >Esqueceu a senha?</a>
+                </div>
+
+                <md-button type="submit" class="md-raised md-accent submit-button" aria-label="LOG IN"
+                           ng-disabled="loginForm.$invalid || loginForm.$pristine" ng-click="vm.login()">
+                    ENTRAR
+                </md-button>
+            </form>            
+
+            
+        </div>
+    </div>
+</div>

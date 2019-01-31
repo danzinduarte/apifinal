@@ -1,0 +1,55 @@
+<md-toolbar class="md-accent md-hue-2">
+    <div class="md-toolbar-tools">
+        <md-icon flex="5" md-font-icon="icon-person-box"></md-icon>
+        <span flex="30">Lista de usuarios</span>
+        <span flex></span>
+        <md-button class="md-raised md-warn" aria-label="Favorite" ng-click="vm.novoUsuario()">
+            + ADICIONAR    
+        </md-button>
+    </div>
+</md-toolbar>
+  
+  <md-card class="default-padding m-20">
+    <!-- exact table from live demo -->
+  <md-table-container>
+    <table md-table md-row-select="false" multiple ng-model="vm.gridService.selected" md-progress="promise">
+      <thead md-head md-order="vm.gridService.query.order" md-on-reorder="vm.gridService.loadData">
+        <tr md-row>
+          <th md-column md-order-by="nome"><span>Usuarios</span></th>          
+          <th md-column>Email</th>
+          <th md-column md-numeric>Senha</th>
+          <th md-column md-numeric>Administrador</th>
+          <th md-column md-numeric>Desativado</th>
+          <th md-column>Data Da Desativação</th>
+          <th md-column>Log Criação</th>          
+          <th md-column>Log Atualização</th>
+          <th md-column>
+
+          </th>          
+        </tr>
+      </thead>
+      <tbody md-body>
+        <tr md-row md-select="record" md-select-id="id" md-auto-select 
+        ng-repeat="record in vm.data">
+        <td md-cell>{{record.nome}}</td>
+          <td md-cell>{{record.email}}</td>
+          <td md-cell>{{record.senha}}</td>
+          <td md-cell>{{record.administrador}}</td>
+          <td md-cell>{{record.desativado}}</td>
+          <td md-cell>{{record.dataDesativacao| date : 'dd/MM/yyyy HH:mm'}}</td>
+          <td md-cell>{{record.logCriacao     | date : 'dd/MM/yyyy HH:mm'}}</td>
+          <td md-cell>{{record.logAtualizacao | date : 'dd/MM/yyyy HH:mm'}}</td>
+          <td md-cell>
+            <md-button class="md-icon-button" aria-label="Favorite">
+                <md-icon md-font-icon="icon-pencil"></md-icon>
+              </md-button>
+          </td>          
+        </tr>
+      </tbody>
+    </table>
+  </md-table-container>
+  
+  <md-table-pagination md-limit="query.limit" md-limit-options="[5, 10, 15]" 
+            md-page="vm.gridService.page" md-total="{{vm.data.length}}" 
+            md-on-paginate="vm.gridService.loadData" md-page-select></md-table-pagination>
+  </md-card>

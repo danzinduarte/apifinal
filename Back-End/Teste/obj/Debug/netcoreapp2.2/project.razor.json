@@ -1,0 +1,14 @@
+{
+  "ProjectFilePath": "c:\\Users\\Danilo\\Documents\\sistema de viagens\\Back-End\\Teste\\teste.csproj",
+  "TargetFramework": "netcoreapp2.2",
+  "TagHelpers": [],
+  "Configuration": {
+    "ConfigurationName": "UnsupportedRazor",
+    "LanguageVersion": "1.0",
+    "Extensions": [
+      {
+        "ExtensionName": "UnsupportedRazorExtension"
+      }
+    ]
+  }
+}

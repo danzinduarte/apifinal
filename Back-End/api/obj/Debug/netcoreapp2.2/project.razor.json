@@ -1,0 +1,14 @@
+{
+  "ProjectFilePath": "c:\\Users\\Dan\\Documents\\WebApi Final\\apifinal\\Back-End\\api\\api.csproj",
+  "TargetFramework": "netcoreapp2.2",
+  "TagHelpers": [],
+  "Configuration": {
+    "ConfigurationName": "MVC-2.1",
+    "LanguageVersion": "2.1",
+    "Extensions": [
+      {
+        "ExtensionName": "MVC-2.1"
+      }
+    ]
+  }
+}
