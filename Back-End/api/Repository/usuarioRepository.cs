@@ -5,6 +5,7 @@ using System.Linq;
 using api.Models;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace api.Repository
 {
     public class usuarioRepository : IusuarioRepository   

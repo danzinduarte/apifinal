@@ -6,10 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using Microsoft.AspNetCore.Authorization;
 
+
 namespace api.Controllers
 {
     [Route("api/[Controller]")]
-    [Authorize()]
+    //[Authorize()]
     public class UsuarioController : Controller
     {
         private readonly IusuarioRepository _usuarioRepository;
