@@ -23,7 +23,7 @@ namespace api.Models
         public void Validacoes()
         {
             AssertionConcern.AssertArgumentLength(this.nome,3 , 40, "O nome deve conter no minimo 3 caracteres e no maximo 40 !");
-            AssertionConcern.AssertArgumentLength(this.senha,6, 24, "A senha deve conter no minimo 6 caracteres e no maximo 24!");
+            //AssertionConcern.AssertArgumentLength(this.senha,6, 24, "A senha deve conter no minimo 6 caracteres e no maximo 24!");
         }
     }
 }

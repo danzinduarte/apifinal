@@ -50,6 +50,7 @@ namespace api.Controllers
                     {
                         usuario.data_desativacao = DateTime.Now;
                     }
+                usuario.senha = TrataHash.GeraMD5Hash(usuario.senha);
                 usuario.log_atualizacao = DateTime.Now;
                 usuario.log_criacao = DateTime.Now;
                 usuario.Validacoes();
