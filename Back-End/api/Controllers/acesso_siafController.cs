@@ -1,11 +1,13 @@
 using System;
 using api.Models;
 using api.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
 {
     [Route("api/[Controller]")]
+    [Authorize()]
     public class acesso_siafController : Controller
     {
         private readonly Iacesso_siafRepository _acesso_siafRepository;
@@ -72,11 +74,12 @@ namespace api.Controllers
                 {
                     acesso_siaf.numdispositivospedidos = 0;
                 }
+                
                _acesso_siafRepository.Add(acesso_siaf);
            }
            catch (Exception e)
            {
-               var resultado = new RetornoView<acesso_siaf>() { sucesso = false, mensagem = e.Message };
+               var resultado = new RetornoView<acesso_siaf>() { sucesso = false, erro = e.Message };
                return BadRequest(resultado);
            }
   
@@ -126,7 +129,7 @@ namespace api.Controllers
                 return BadRequest(result);
             }
 
-            var resultado = new RetornoView<acesso_siaf>() { data = _acesso_siaf, sucesso = true, mensagem = "Cliente Atualizado com Sucesso!" };
+            var resultado = new RetornoView<acesso_siaf>() { data = _acesso_siaf, sucesso = true, erro = "Cliente Atualizado com Sucesso!" };
             return resultado;
      
         }

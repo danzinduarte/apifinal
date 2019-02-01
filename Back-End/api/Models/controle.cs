@@ -9,16 +9,16 @@ namespace api.Models
     {
         [Key]
         public int id { get; set; }
-        public string Razao_social { get; set; }
-        public string Nome_fantasia { get; set; }
-        public string Cnpj { get; set; }
-        public string Numero_serie { get; set; }
-        public string Versao_siaf { get; set; }
-        public string Ip { get; set; }
-        public string Versao_ws { get; set; }
-        public string Status_acesso { get; set; }
-        public DateTime Data_hora_acesso { get; set; }
-        public string Tipo_contrato { get; set; }
-        public string Tipo_versao { get; set; }
+        public string razaosocial { get; set; }
+        public string nomefantasia { get; set; }
+        public string cnpj { get; set; }
+        public string numeroserie { get; set; }
+        public string versaosiaf { get; set; }
+        public string ip { get; set; }
+        public string versaows { get; set; }
+        public string statusacesso { get; set; }
+        public DateTime datahoraacesso { get; set; }
+        public string tipocontrato { get; set; }
+        public string tipoversao { get; set; }
     }
 }

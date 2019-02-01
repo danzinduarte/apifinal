@@ -4,6 +4,6 @@ namespace api.Controllers
     {
         public bool sucesso { get; set; }
         public T data { get; set; }
-        public string mensagem {get; set;}
+        public string erro {get; set;}
     }
 }

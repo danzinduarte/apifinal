@@ -1,11 +1,15 @@
-using System;
+using System.Collections.Generic;
+using System.Linq;
 using api.Models;
 using api.Repository;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace api.Controllers
 {
     [Route("api/[Controller]")]
+    [Authorize()]
     public class UsuarioController : Controller
     {
         private readonly IusuarioRepository _usuarioRepository;
@@ -13,13 +17,13 @@ namespace api.Controllers
         {
             _usuarioRepository = usuarioRepository;
         }
-
+        
         [HttpGet]
         public ActionResult<RetornoView<Usuario>> GetAll()
         {
             return Ok (new{data = _usuarioRepository.GetAll()});
         }
-
+        
         [HttpGet("{id}", Name = "GetUsuario")]
         public ActionResult<RetornoView<Usuario>> GetById(int id)
         {
@@ -32,34 +36,36 @@ namespace api.Controllers
             return Ok(new {data = usuario});
         }
 
+        
         [HttpPost]
         [Route("")]
         public ActionResult<RetornoView<Usuario>> Create([FromBody] Usuario usuario)
         {
-            if(usuario.email == null)
-            {
-                return BadRequest();
-            }
-            
-            try
-            {
-                if ( usuario.desativado == true)
+           
+           if(usuario.administrador == true )
+           {
+                try
                 {
-                    usuario.data_desativacao = DateTime.Now;
+                    if ( usuario.desativado == true)
+                    {
+                        usuario.data_desativacao = DateTime.Now;
+                    }
+                usuario.log_atualizacao = DateTime.Now;
+                usuario.log_criacao = DateTime.Now;
+                usuario.Validacoes();
+                _usuarioRepository.Add(usuario);
+                
                 }
-               usuario.log_atualizacao = DateTime.Now;
-               usuario.log_criacao = DateTime.Now;
-               usuario.Validacoes();
-               _usuarioRepository.Add(usuario);
+                catch (Exception ex)
+                {
+                    var resultado = new RetornoView<Usuario>() { sucesso = false, erro = ex.Message };
+                    return BadRequest(resultado);
+                }
+
+              
             }
-            catch (Exception)
-            {
-               var resultado = new RetornoView<Usuario>() { sucesso = false, mensagem = "falha ao criar o usuario"};
-               return BadRequest(resultado);
-            }
-  
-            var result = new RetornoView<Usuario>() { data = usuario, sucesso = true };
-            return CreatedAtRoute("GetUsuario", new { id = usuario.id}, result);    
+             var result = new RetornoView<Usuario>() { data = usuario, sucesso = true };
+            return CreatedAtRoute("GetUsuario", new { id = usuario.id}, result); 
         }
 
         [HttpPut("{id}")]
@@ -74,6 +80,14 @@ namespace api.Controllers
             }
             try 
             {
+                if(usuario.nome.Length < 3)
+                {
+                    return BadRequest();
+                }
+                if(usuario.senha.Length < 6)
+                {
+                    return BadRequest();
+                }
                 if(usuario.desativado == true)
                 {
                     usuario.data_desativacao = DateTime.Now;
@@ -85,7 +99,7 @@ namespace api.Controllers
                 _usuario.administrador      = usuario.administrador;
                 _usuario.log_atualizacao    = DateTime.Now;
                 _usuario.data_desativacao   = usuario.data_desativacao;
-
+                usuario.Validacoes();
                 _usuarioRepository.Update(_usuario);
             }
                
@@ -96,7 +110,7 @@ namespace api.Controllers
                 return BadRequest(result);
             }
 
-            var resultado = new RetornoView<Usuario>() { data = _usuario, sucesso = true, mensagem = "Usuario Atualizado com Sucesso!" };
+            var resultado = new RetornoView<Usuario>() { data = _usuario, sucesso = true};
             return resultado;
         }
        

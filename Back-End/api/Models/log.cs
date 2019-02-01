@@ -13,7 +13,6 @@ namespace api.Models
         public int usuario_id { get; set; }
         public virtual Usuario usuario {get;set;}
         public DateTime data_hora {get;set;}
-        public string rotina { get; set; }
         public string acao {get;set;}
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Validation;
 
 namespace api.Models
 {
@@ -20,6 +21,6 @@ namespace api.Models
         public string androidpedidos { get; set; }
         public int numdispositivospedidos { get; set; }
         public string observacao { get; set; }
-
+        
     }
 }

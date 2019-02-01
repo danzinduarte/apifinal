@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using api.Models;
 using Microsoft.EntityFrameworkCore;
@@ -34,12 +35,30 @@ namespace api.Repository
         }
         public usuario_permissao Find(int id)
         {
-            return _context.usuario_permissao.FirstOrDefault(u => u.id == id);
+            var teste =  _context.usuario_permissao
+            .Include(u => u.usuario)
+            .FirstOrDefault(u => u.id == id);
+            
+           if (teste == null)
+            return teste;
+
+            var permissao = new usuario_permissao();
+            permissao.id = teste.id;
+            permissao.rotina = teste.rotina;
+            permissao.usuario = teste.usuario;
+            permissao.usuario_id = teste.usuario_id;
+            permissao.usuario.nome = teste.usuario.nome;
+
+            return permissao;
+
         }
 
         public IEnumerable<usuario_permissao> GetAll()
         {
-            return _context.usuario_permissao.AsNoTracking().ToList();
+            var teste = _context.usuario_permissao
+            .Include(u => u.usuario)
+            .ToList();
+            return teste;
         }
 
         public void Remove(int id)

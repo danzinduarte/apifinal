@@ -18,12 +18,12 @@ namespace api.Models
         public DateTime data_desativacao { get; set; }
         public DateTime log_criacao { get; set; }
         public DateTime log_atualizacao { get; set; }
+        public string token { get; set; }
 
-         public void Validacoes()
+        public void Validacoes()
         {
-            AssertionConcern.AssertArgumentNotEquals(this.email, 0, "Email é obrigatório!");
-            AssertionConcern.AssertArgumentNotEquals(this.nome, 0, "Nome é obrigatório!");
-            AssertionConcern.AssertArgumentNotEquals(this.senha, 0, "Senha é obrigatória!");
+            AssertionConcern.AssertArgumentLength(this.nome,3 , 40, "O nome deve conter no minimo 3 caracteres e no maximo 40 !");
+            AssertionConcern.AssertArgumentLength(this.senha,6, 24, "A senha deve conter no minimo 6 caracteres e no maximo 24!");
         }
     }
 }
